@@ -19,11 +19,23 @@
             <h4>Search</h3>
                 <form class="col s12" id='user_form'>
                     <div class="row">
-                        <input type="text" id='firstname'>
-                        <input type="text" id='lastname'>
-                        <input type="text" id='number'>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="firstname" type="text" class="validate">
+                            <label for="firstname">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="lastname" type="text" class="validate">
+                            <label for="lastname">Last Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">phone</i>
+                            <input id="number" type="text" class="validate">
+                            <label for="number">Number</label>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
                 </form>
         </div>
         <ul class="collection with-header user-list" id='user_list'>
