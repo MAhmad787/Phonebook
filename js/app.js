@@ -53,10 +53,24 @@ class UI {
       el.parentElement.remove();
     }
   }
+  static clearFields() {
+    document.querySelector('#firstname').value = '';
+    document.querySelector('#lastname').value = '';
+    document.querySelector('#number').value = '';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', UI.displayUser);
 
 document.querySelector('#user_list').addEventListener('click', (e) => {
   UI.deleteUser(e.target);
+});
+document.querySelector('#user_form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const firstname = document.querySelector('#firstname').value;
+  const lastname = document.querySelector('#lastname').value;
+  const number = document.querySelector('#number').value;
+  const user = new User(firstname, lastname, number);
+  UI.addUserToList(user);
+  UI.clearFields();
 });

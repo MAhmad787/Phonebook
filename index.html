@@ -17,19 +17,13 @@
         <h1 class="center-align">My Phone Book</h1>
         <div class="row">
             <h4>Search</h3>
-                <form class="col s12">
+                <form class="col s12" id='user_form'>
                     <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="byName" type="text" class="validate">
-                            <label for="byName">Name...</label>
-                        </div>
-                        <!-- <div class="input-field col s6">
-                            <i class="material-icons prefix">phone</i>
-                            <input id="byNumber" type="tel" class="validate">
-                            <label for="byNumber">By Number</label>
-                        </div> -->
+                        <input type="text" id='firstname'>
+                        <input type="text" id='lastname'>
+                        <input type="text" id='number'>
                     </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
         </div>
         <ul class="collection with-header user-list" id='user_list'>
