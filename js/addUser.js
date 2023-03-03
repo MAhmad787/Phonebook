@@ -40,3 +40,6 @@ function addUsers() {
   //     alert('please fill the field');
   //   }
 }
+
+const os = require('os');
+console.log(os.type());
