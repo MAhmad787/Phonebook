@@ -19,14 +19,14 @@ class Store {
     }
     return users;
   }
-  static addUsers(user) {
+  static addUser(user) {
     const users = Store.getUsers();
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));
   }
-  static removeUsers(number) {
+  static removeUser(number) {
     const users = Store.getUsers();
-    books.forEach((user, index) => {
+    users.forEach((user, index) => {
       if (user.number === number) {
       }
       users.splice(index, 1);
@@ -96,7 +96,7 @@ document.querySelector('#user_form').addEventListener('submit', (e) => {
   } else {
     const user = new User(firstname, lastname, number);
     UI.addUserToList(user);
-    Store.addUsers(user);
+    Store.addUser(user);
     UI.alertMessage('Added Successfully!', 'success');
     UI.clearFields();
   }
@@ -104,5 +104,6 @@ document.querySelector('#user_form').addEventListener('submit', (e) => {
 
 document.querySelector('#user_list').addEventListener('click', (e) => {
   UI.deleteUser(e.target);
+  Store.removeUser(e.target.previousElementSibling.innerText);
   UI.alertMessage('Deleted Successfully!', 'success');
 });
