@@ -8,32 +8,36 @@ class User {
   }
 }
 
+// Store class
+class Store {
+  static getUsers() {
+    let users;
+    if (localStorage.getItem('users') === null) {
+      users = [];
+    } else {
+      users = JSON.parse(localStorage.getItem('users'));
+    }
+    return users;
+  }
+  static addUsers(user) {
+    const users = Store.getUsers();
+    users.push(user);
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+  static removeUsers(number) {
+    const users = Store.getUsers();
+    books.forEach((user, index) => {
+      if (user.number === number) {
+      }
+      users.splice(index, 1);
+    });
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+}
 // UI Class : Deals with all the UI Function
 class UI {
   static displayUser() {
-    let storedUsers = [
-      {
-        firstname: 'Ahmad',
-        lastname: 'Maqbool',
-        number: '+92 314 4121242',
-      },
-      {
-        firstname: 'Saeed',
-        lastname: 'Ahmad',
-        number: '+92 310 1111598',
-      },
-      {
-        firstname: 'Usman',
-        lastname: 'Sadiq',
-        number: '+92 898 8787664',
-      },
-      {
-        firstname: 'Muhammad',
-        lastname: 'Sajid',
-        number: '+92 310 11113543',
-      },
-    ];
-    const users = storedUsers;
+    const users = Store.getUsers();
     users.forEach((user) => UI.addUserToList(user));
   }
   static addUserToList(user) {
@@ -92,6 +96,7 @@ document.querySelector('#user_form').addEventListener('submit', (e) => {
   } else {
     const user = new User(firstname, lastname, number);
     UI.addUserToList(user);
+    Store.addUsers(user);
     UI.alertMessage('Added Successfully!', 'success');
     UI.clearFields();
   }
