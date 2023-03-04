@@ -39,15 +39,28 @@ class UI {
   static addUserToList(user) {
     const list = document.querySelector('#user_list');
     const row = document.createElement('li');
-    row.classList.add('item-user', 'row');
+    row.classList.add('item-user');
     row.innerHTML = `
-    <h6 class='first-name col s3'>${user.firstname}</h6>
-    <h6 class='last-name col s3'>${user.lastname}</h6>
-    <h6 class='number col s4'>${user.number}</h6>
-    <button class="waves-effect waves-light btn delete col s2">Delete</button>
+    <h6 class='first-name'>${user.firstname}</h6>
+    <h6 class='last-name'>${user.lastname}</h6>
+    <h6 class='number'>${user.number}</h6>
+    <button class="waves-effect waves-light btn delete">X</button>
      `;
     list.appendChild(row);
   }
+  // Validation
+  static alertMessage(message, className) {
+    const div = document.createElement('div');
+    div.className = `alert alert-${className}`;
+    div.appendChild(document.createTextNode(message));
+    const container = document.querySelector('.container');
+    const form = document.querySelector('.row');
+    container.insertBefore(div, form);
+
+    // Remove the alert
+    setTimeout(() => div.remove(), 3000);
+  }
+
   static deleteUser(el) {
     if (el.classList.contains('delete')) {
       el.parentElement.remove();
@@ -62,15 +75,29 @@ class UI {
 
 document.addEventListener('DOMContentLoaded', UI.displayUser);
 
-document.querySelector('#user_list').addEventListener('click', (e) => {
-  UI.deleteUser(e.target);
-});
 document.querySelector('#user_form').addEventListener('submit', (e) => {
   e.preventDefault();
   const firstname = document.querySelector('#firstname').value;
   const lastname = document.querySelector('#lastname').value;
   const number = document.querySelector('#number').value;
-  const user = new User(firstname, lastname, number);
-  UI.addUserToList(user);
-  UI.clearFields();
+  if (
+    firstname === '' ||
+    lastname === '' ||
+    number === '' ||
+    firstname === ' ' ||
+    lastname === ' ' ||
+    number === ' '
+  ) {
+    UI.alertMessage('Please fill all fields', 'danger');
+  } else {
+    const user = new User(firstname, lastname, number);
+    UI.addUserToList(user);
+    UI.alertMessage('Added Successfully!', 'success');
+    UI.clearFields();
+  }
+});
+
+document.querySelector('#user_list').addEventListener('click', (e) => {
+  UI.deleteUser(e.target);
+  UI.alertMessage('Deleted Successfully!', 'success');
 });
